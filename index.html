@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -18,10 +18,21 @@
         <span style="display: inline-block;">Ceres | Index of loaders & mods</span>
     </h1>
     <div>
-        <label for="mcVersion" style="font-size:20px;font-weight:bold;display:inline-block;">Minecraft Version:&nbsp;</label>
+        <label style="font-size:20px;font-weight:bold;display:inline-block;">Minecraft Version:&nbsp;</label>
         <select name="mcVersion" id="mcVersion" onchange="updateAll()" value="loading">
             <option value="loading">Loading...</option>
         </select>
+    </div>
+    <div style="display: inline-flex;font-size:20px;font-weight:bold;">
+        <label>Loader:</label>&nbsp;
+        <div><label style="display: inline-flex;"><input id="loader-all" type="radio" name="loader"
+                    onchange="updateAll()" checked>All</label></div>&nbsp;
+        <div><label style="display: inline-flex;"><input id="loader-forge" type="radio" name="loader"
+                    onchange="updateAll()">Forge</label></div>&nbsp;
+        <div><label style="display: inline-flex;"><input id="loader-fabric" type="radio" name="loader"
+                    onchange="updateAll()">Fabric</label></div>&nbsp;
+        <div><label style="display: inline-flex;"><input id="loader-neoforge" type="radio" name="loader"
+                    onchange="updateAll()">NeoForge</label></div>&nbsp;
     </div>
     <h2>Mod Loaders</h2>
     <div class="container" id="loaders"></div>
@@ -35,13 +46,17 @@
     <div class="center" id="addNew" style="width: 430px;" hidden>
         <h2>Add new mod from Modrinth</h2>
         <div class="form-group">
-            <label for="slug">Modrinth id/slug:</label>
+            <label>Modrinth id/slug:</label>
             <input type="text" id="slug" name="slug" placeholder="lhGA9TYQ/fabric-api">
         </div>
         <div class="button-group">
             <button style="width: 60px;" class="btn btn-primary" onclick="addNewVersion()">Add</button>
             <button style="width: 60px;" class="btn btn-secondary" onclick="hideForm()">Cancel</button>
         </div>
+    </div>
+    <div>
+        Copyright <a href="https://www.iafenvoy.com">IAFEnvoy</a>,
+        <a href="https://github.com/MCDev-Tech/Ceres/blob/main/LICENSE">All Right Reserved</a>
     </div>
 </body>
 

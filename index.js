@@ -1,10 +1,10 @@
-import { loaders } from "./loader"
+import { allLoaders, loaders } from "./loader"
 import { formatNameString } from "./util"
 import { getFromModrinth } from "./version"
 
 export const releaseVersions = [], snapshotVersions = []
 const data = {}, failedText = '<span style="color:red">No Available Version</span>'
-let customMods
+let customMods, selectedLoader
 
 export function getOrCreateVersionData(key) {
     if (!data[key]) data[key] = {}
@@ -56,7 +56,11 @@ window.hideForm = _ => {
 }
 
 window.updateAll = _ => {
-    ['forge', 'fabric', 'neoforge', ...customMods].forEach(updateVersion)
+    selectedLoader = null
+    allLoaders.forEach(x => selectedLoader = document.getElementById('loader-' + x).checked ? x : selectedLoader)
+    allLoaders.forEach(x => document.getElementById('item-' + x).hidden = selectedLoader != null && selectedLoader != x)
+        ;
+    [...allLoaders, ...customMods].forEach(updateVersion)
     window.localStorage.setItem('mcVersion', document.getElementById('mcVersion').value)
 }
 
@@ -85,13 +89,17 @@ const calculateVerionText = (slug, mcVersion) => {
         case 'neoforge': return d.neoforge ?? failedText
         default:
             if (d[slug])
-                return Object.keys(d[slug]).map(x => `${formatNameString(x)}: ${d[slug][x].version} (${d[slug][x].id})`).join('<br>')
+                if (selectedLoader)
+                    return d[slug][selectedLoader] ? `${d[slug][selectedLoader].version} (${d[slug][selectedLoader].id})` : failedText
+                else
+                    return Object.keys(d[slug]).map(x => `${formatNameString(x)}: ${d[slug][x].version} (${d[slug][x].id})`).join('<br>')
             else return failedText
     }
 }
 
 const createCard = (container, imgSrc, title, slug, canDelete) => {
     let item = document.createElement('div')
+    item.id = 'item-' + slug
     item.className = 'item'
     item.style.position = 'relative'
     container.appendChild(item)

@@ -1,6 +1,8 @@
 import { parseMavenMetadata, corsProxy, versionCompare } from './util'
 import { getOrCreateVersionData, releaseVersions, snapshotVersions, updateVersion } from '.'
 
+export const allLoaders = ['forge', 'fabric', 'neoforge']
+
 const getForgeVersions = async _ => {
     let versions = await fetch('https://maven.minecraftforge.net/net/minecraftforge/forge/maven-metadata.xml').catch(err => console.log(err))
         .then(res => res.text())

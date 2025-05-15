@@ -1,6 +1,5 @@
 import { getOrCreateVersionData, updateVersion } from "."
-
-const allLoaders = ['forge', 'fabric', 'neoforge']
+import { allLoaders } from "./loader"
 
 export async function getFromModrinth(slug) {
     let versions = await fetch(`https://api.modrinth.com/v2/project/${slug}/version`).then(res => res.json()).catch(err => console.log(err))
