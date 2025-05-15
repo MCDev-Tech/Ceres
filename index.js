@@ -58,8 +58,7 @@ window.hideForm = _ => {
 window.updateAll = _ => {
     selectedLoader = null
     allLoaders.forEach(x => selectedLoader = document.getElementById('loader-' + x).checked ? x : selectedLoader)
-    allLoaders.forEach(x => document.getElementById('item-' + x).hidden = selectedLoader != null && selectedLoader != x)
-        ;
+    allLoaders.forEach(x => document.getElementById('item-' + x).hidden = selectedLoader != null && selectedLoader != x);
     [...allLoaders, ...customMods].forEach(updateVersion)
     window.localStorage.setItem('mcVersion', document.getElementById('mcVersion').value)
 }
@@ -84,7 +83,7 @@ const calculateVerionText = (slug, mcVersion) => {
     let d = data[mcVersion]
     if (!d) return failedText
     switch (slug) {
-        case 'forge': return d.forge ?? failedText
+        case 'forge': return `${mcVersion}-${d.forge ?? failedText}`
         case 'fabric': return `Loader: ${d.fabric ?? failedText}<br>Yarn: ${d.yarn?.name ?? failedText}`
         case 'neoforge': return d.neoforge ?? failedText
         default:
