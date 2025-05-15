@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ceres | Index of loaders & mods</title>
+    <script src="index.js" type="module"></script>
+    <link rel="icon" type="image/png" href="favicon.webp">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <h1>
+        <img src="favicon.webp" style="width:64px;vertical-align: middle;">
+        &nbsp;
+        <span style="display: inline-block;">Ceres | Index of loaders & mods</span>
+    </h1>
+    <div>
+        <label for="mcVersion" style="font-size:20px;font-weight:bold;display:inline-block;">Minecraft Version:&nbsp;</label>
+        <select name="mcVersion" id="mcVersion" onchange="updateAll()" value="loading">
+            <option value="loading">Loading...</option>
+        </select>
+    </div>
+    <h2>Mod Loaders</h2>
+    <div class="container" id="loaders"></div>
+    <h2>
+        <span style="display: inline-block;">Mods</span>
+        &nbsp;
+        <button class="btn btn-secondary" style="display: inline-block;vertical-align: middle;"
+            onclick="document.getElementById('addNew').hidden=false">Add new</button>
+    </h2>
+    <div class="container" id="mods"></div>
+    <div class="center" id="addNew" style="width: 430px;" hidden>
+        <h2>Add new mod from Modrinth</h2>
+        <div class="form-group">
+            <label for="slug">Modrinth id/slug:</label>
+            <input type="text" id="slug" name="slug" placeholder="lhGA9TYQ/fabric-api">
+        </div>
+        <div class="button-group">
+            <button style="width: 60px;" class="btn btn-primary" onclick="addNewVersion()">Add</button>
+            <button style="width: 60px;" class="btn btn-secondary" onclick="hideForm()">Cancel</button>
+        </div>
+    </div>
+</body>
+
+</html>
