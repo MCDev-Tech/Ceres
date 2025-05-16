@@ -27,11 +27,6 @@ export function versionCompare(v1, v2) {
     }
 }
 
-// Use for bypass CORS error from some repos (such as neoforge maven)
-export function corsProxy(url) {
-    return fetch('https://api.codetabs.com/v1/proxy?quest=' + url).catch(err => console.log(err))
-}
-
 export function formatNameString(name) {
     return name.toLowerCase().split('_').reduce((ret, word) => ret + word[0].toUpperCase() + word.slice(1) + ' ', '')
 }

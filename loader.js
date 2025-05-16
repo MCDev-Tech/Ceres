@@ -1,4 +1,4 @@
-import { parseMavenMetadata, corsProxy, versionCompare } from './util'
+import { parseMavenMetadata, versionCompare } from './util'
 import { getOrCreateVersionData, releaseVersions, snapshotVersions, updateVersion } from '.'
 
 export const allLoaders = ['forge', 'fabric', 'neoforge']
@@ -40,7 +40,7 @@ const getYarnVersions = async _ => {
 }
 
 const getNeoForgeVersions = async _ => {
-    let versions = await corsProxy('https://maven.neoforged.net/net/neoforged/neoforge/maven-metadata.xml')
+    let versions = await fetch('https://proxy.mcdev.tech/neoforge-maven/net/neoforged/neoforge/maven-metadata.xml')
         .then(res => res.text())
         .then(xml => parseMavenMetadata(xml))
     if (!versions) return
