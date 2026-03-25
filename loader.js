@@ -45,7 +45,8 @@ const getNeoForgeVersions = async _ => {
         .then(xml => parseMavenMetadata(xml))
     if (!versions) return
     for (let s of versions.versions) {
-        let n = s.split('.'), mc = n[0] == 0 ? n[1] : '1.' + (n[1] == 0 ? n[0] : n[0] + '.' + n[1]), d = getOrCreateVersionData(mc)
+        let n = s.split('.'), mc = (+n[0] >= 26 ? '' : '1.') + n[0] + '.' + n[1], d = getOrCreateVersionData(mc)
+        console.log(s, mc)
         if (versionCompare(d.neoforge ?? '0.0.0', s) < 0) d.neoforge = s
     }
     updateVersion('neoforge')
